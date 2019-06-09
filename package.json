@@ -1,22 +1,12 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
-  "version": "2.5.0",
-  "description": "CoreUI Free Angular 2+ Admin Template",
+  "name": "daumgrito_dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard do projeto Dá Um Grito",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
+    "name": "JGabriel Gruber",
+    "github": "https://github.com/JGabrielGruber"
   },
-  "contributors": [
-    {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
-    }
-  ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2019 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
+  "license": "GPL3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
