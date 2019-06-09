@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+	<div class="row">
+		<!--/.col-->
+		<div class="col-sm-6 col-lg-3">
+			<div class="card text-white bg-primary">
+				<div class="card-body pb-0">
+					<div class="text-value">19.423</div>
+					<div>Chamados</div>
+				</div>
+				<div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+					<canvas baseChart class="chart" [datasets]="blocoChart1Data" [labels]="mesLabels"
+						[options]="blocoChartOptions" [colors]="blocoChartColors" [legend]="blocoChart1Legend"
+						[chartType]="blocoChartType"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-lg-3">
+			<div class="card text-white bg-warning">
+				<div class="card-body pb-0">
+					<div class="text-value">9.823</div>
+					<div>Clientes</div>
+				</div>
+				<div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+					<canvas baseChart class="chart" [datasets]="blocoChart2Data" [labels]="mesLabels"
+						[options]="blocoChartOptions" [colors]="blocoChartColors" [legend]="blocoChart2Legend"
+						[chartType]="blocoChartType"></canvas>
+				</div>
+			</div>
+		</div>
+		<!--/.col-->
+		<div class="col-sm-6 col-lg-3">
+			<div class="card text-white bg-success">
+				<div class="card-body pb-0">
+					<div class="text-value">123</div>
+					<div>Empresas</div>
+				</div>
+				<div class="chart-wrapper mt-3" style="height:70px;">
+					<canvas baseChart class="chart" [datasets]="blocoChart3Data" [labels]="mesLabels"
+						[options]="blocoChartOptions" [colors]="blocoChartColors" [legend]="blocoChart3Legend"
+						[chartType]="blocoChartType"></canvas>
+				</div>
+			</div>
+		</div>
+		<!--/.col-->
+		<div class="col-sm-6 col-lg-3">
+			<div class="card text-white bg-info">
+				<div class="card-body pb-0">
+					<div class="text-value">1.524</div>
+					<div>Agentes</div>
+				</div>
+				<div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+					<canvas baseChart class="chart" [datasets]="blocoChart4Data" [labels]="mesLabels"
+						[options]="blocoChartOptions" [colors]="blocoChartColors" [legend]="blocoChart4Legend"
+						[chartType]="blocoChartType"></canvas>
+				</div>
+			</div>
+		</div>
+		<!--/.col-->
+	</div>
+	<!--/.row-->
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-5">
+					<h4 class="card-title mb-0">Meus Chamados</h4>
+					<div class="small text-muted">Registro de chamados abertos e resolvidos</div>
+				</div>
+				<!--/.col-->
+				<div class="col-sm-7 d-none d-md-block">
+					<button type="button" class="btn btn-primary float-right"><i
+							class="icon-cloud-download"></i></button>
+					<div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+						<label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Day"
+							id="option1">Dia</label>
+						<label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Month"
+							id="option2">Mês</label>
+						<label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Year"
+							id="option3">Ano</label>
+					</div>
+				</div>
+				<!--/.col-->
+			</div>
+			<!--/.row-->
+			<div class="chart-wrapper" style="height:300px;margin-top:40px;">
+				<canvas baseChart class="chart" [datasets]="mainChartData" [labels]="mesLabels"
+					[options]="mainChartOptions" [colors]="mainChartColours" [legend]="mainChartLegend"
+					[chartType]="mainChartType"></canvas>
+			</div>
+		</div>
+	</div>
+</div>

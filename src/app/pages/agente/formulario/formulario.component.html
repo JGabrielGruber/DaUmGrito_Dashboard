@@ -1,0 +1,63 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<strong>Formulário Agente</strong>
+				<small></small>
+			</div>
+			<div class="card-body">
+				<form #agenteForm="ngForm">
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="foto">Foto</label>
+							<input type="file" class="form-control" name="foto" [(ngModel)]="foto" required>
+						</div>
+						<div class="form-group col-lg-6">
+							<img [src]="foto">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label for="cpf">CPF</label>
+							<input type="number" class="form-control" name="cpf" placeholder="Digite o CPF do Agente"
+								required>
+						</div>
+						<div class="form-group col-lg-9">
+							<label for="nome">Nome</label>
+							<input type="text" class="form-control" name="nome" placeholder="Digite o nome do Agente"
+								required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="telefone_um">Telefone</label>
+							<input type="number" class="form-control" name="telefone_um"
+								placeholder="Digite o telefone do Agente" required>
+						</div>
+						<div class="form-group col-lg-6">
+							<label for="email_um">Email</label>
+							<input type="email" class="form-control" name="email_um"
+								placeholder="Digite o email do Agente" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="funcao">Função</label>
+							<input type="number" class="form-control" name="funcao"
+								placeholder="Digite a função do Agente" required>
+						</div>
+						<div class="form-group col-lg-6">
+							<label for="hash">Senha</label>
+							<input type="password" class="form-control" name="hash" placeholder="Senha para o Agente"
+								required>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<button type="button" (click)="teste()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+				<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+			</div>
+		</div>
+	</div>
+</div>
