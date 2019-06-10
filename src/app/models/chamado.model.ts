@@ -12,6 +12,7 @@ export class Chamado {
 	};
 	foto		: string;
 	resolucoes	: [];
+	status		: string;
 	timestamp	: string;
 	timeupdate	: string;
 }

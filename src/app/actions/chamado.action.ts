@@ -39,25 +39,21 @@ export async function fetchChamados(chamadoService: ChamadoService, loginService
 		isFetching	= data.isFetching;
 	});
 	if (!isFetching) {
-		let localChamados	= await chamadoService.getChamados();
+		let localChamados	= await chamadoService.getLocalChamados();
 		if (localChamados) {
 			store.dispatch(new SetChamado(localChamados));
 		}
 		store.dispatch(new RequestChamado());
 		let token	= await loginService.getToken();
 		if (token) {
-			return await store.select('cliente').subscribe(async (data) => {
-				if (data.data.cpf) {
-					let response	= await chamadoService.getByCliente(data.data, token);
-					if (response.success) {
-						chamadoService.setChamados(response.data);
-						store.dispatch(new ReceiveFetch);
-						return response.data;
-					}
-					store.dispatch(new ReceiveFetch);
-					return;
-				}
-			});
+			let response	= await chamadoService.getChamados(token);
+			if (response.success) {
+				chamadoService.setChamados(response.data);
+				store.dispatch(new SetChamado(response.data));
+				return response.data;
+			}
+			store.dispatch(new ReceiveFetch);
+			return;
 		}
 		return;
 	}

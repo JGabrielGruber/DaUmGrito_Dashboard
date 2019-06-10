@@ -18,8 +18,16 @@ export class ChamadoService extends Service<Chamado> {
 		super(`${Configs.url}chamados`, http);
 	}
 
+	async getChamados(token): Promise<Http> {
+		return this.http.get(`${ this.url }`, token);
+	}
+
 	async getByCliente(cliente: Cliente, token): Promise<Http> {
 		return this.http.get(`${ this.url }/cliente/${ cliente.cpf }`, token);
+	}
+
+	async postAtendente(id: string, token): Promise<Http> {
+		return this.http.post(`${ this.url }/${ id }/responsavel`, {}, token);
 	}
 
 	setChamados(chamado: Chamado) {
@@ -30,7 +38,7 @@ export class ChamadoService extends Service<Chamado> {
 		sessionStorage.setItem(Configs.storageKeys.chamados, "");
 	}
 
-	getChamados(): Array<Chamado> {
+	getLocalChamados(): Array<Chamado> {
 		return JSON.parse(sessionStorage.getItem(Configs.storageKeys.chamados));
 	}
 }

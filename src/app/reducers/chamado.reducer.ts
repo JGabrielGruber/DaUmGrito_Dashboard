@@ -19,6 +19,7 @@ const defaultState: ChamadoReducer = {
 			},
 			titulo		: null,
 			descricao	: null,
+			status		: null,
 			localizacao	: null,
 			timestamp	: null,
 			timeupdate	: null
@@ -30,7 +31,7 @@ const newState = (state, newData) => {
 	return Object.assign({}, state, newData);
 }
 
-export function chamadoRedcuers(state: ChamadoReducer = defaultState, action: Action) {
+export function chamadoReducers(state: ChamadoReducer = defaultState, action: Action) {
 
 	switch (action.type) {
 		case ChamadoActions.REQUEST_CHAMADO:

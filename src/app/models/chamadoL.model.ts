@@ -5,6 +5,7 @@ export class ChamadoLight {
 	cliente		: ClienteLight;
 	titulo		: string;
 	descricao	: string;
+	status		: string;
 	localizacao	: {
 		latitude	: number;
 		longitude	: number;

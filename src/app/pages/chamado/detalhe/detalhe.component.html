@@ -1,0 +1,112 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card" *ngIf="chamado._id">
+			<div class="card-body">
+				<div class="row">
+					<div class="form-group col-lg-12">
+						<h3>Chamado</h3>
+					</div>
+				</div>
+				<div class="row" *ngIf="chamado.foto">
+					<div class="form-group col-lg-12">
+						<h5>Foto</h5>
+						<img [src]="chamado.foto">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12">
+						<h5>Título</h5>
+						<p>{{ chamado.titulo }}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12">
+						<h5>Descrição</h5>
+						<p>{{ chamado.descricao }}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-3">
+						<h5>Latitude</h5>
+						<p>{{ chamado.localizacao.latitude }}</p>
+					</div>
+					<div class="form-group col-lg-3">
+						<h5>Longitude</h5>
+						<p>{{ chamado.localizacao.longitude }}</p>
+					</div>
+					<div class="form-group col-lg-3">
+						<h5>Mapa</h5>
+						<a href="https://www.google.com/maps/search/?api=1&query={{ chamado.localizacao.latitude }}, {{ chamado.localizacao.longitude }}">Abrir no Google Maps</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-3">
+						<h5>Criado</h5>
+						<p>{{ chamado.timestamp }}</p>
+					</div>
+					<div class="form-group col-lg-3">
+						<h5>Atualizado</h5>
+						<p>{{ chamado.timeupdate }}</p>
+					</div>
+					<div class="form-group col-lg-3">
+						<h5>Status</h5>
+						<p>{{ chamado.status }}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12">
+						<h3>Cliente</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-6">
+						<h5>Nome</h5>
+						<p>{{ chamado.cliente.nome }}</p>
+					</div>
+					<div class="form-group col-lg-6">
+						<h5>CPF</h5>
+						<p>{{ chamado.cliente.cpf }}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-6">
+						<h5>Email</h5>
+						<p>{{ chamado.cliente.contato.email_um }}</p>
+					</div>
+				</div>
+				<div *ngIf="chamado.responsavel">
+					<div class="row">
+						<div class="form-group col-lg-12">
+							<h3>Reponsável/Atendente</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<h5>Nome</h5>
+							<p>{{ chamado.responsavel.nome }}</p>
+						</div>
+						<div class="form-group col-lg-6">
+							<h5>CPF</h5>
+							<p>{{ chamado.responsavel.cpf }}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<h5>Email</h5>
+							<p>{{ chamado.responsavel.contato.email_um }}</p>
+						</div>
+						<div class="form-group col-lg-6">
+							<h5>Função</h5>
+							<p>{{ chamado.responsavel.funcao }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button type="button" *ngIf="!chamado.responsavel"
+					class="btn btn-sm btn-primary" (click)="atender()">
+					<i class="fa fa-dot-circle-o"></i> Atender Chamado</button>
+			</div>
+		</div>
+	</div>
+</div>
