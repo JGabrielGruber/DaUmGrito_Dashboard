@@ -21,7 +21,7 @@ export class UsuarioService extends Service<Cliente>{
 		return this.http.get(`${this.url}/token`, token);
 	}
 
-	setUsuario(usuario: Cliente) {
+	setUsuario(usuario: any) {
 		sessionStorage.setItem(Configs.storageKeys.usuario, JSON.stringify(usuario));
 	}
 
@@ -29,7 +29,7 @@ export class UsuarioService extends Service<Cliente>{
 		sessionStorage.setItem(Configs.storageKeys.usuario, "");
 	}
 
-	getUsuario(): Cliente {
+	getUsuario(): any {
 		return JSON.parse(sessionStorage.getItem(Configs.storageKeys.usuario));
 	}
 
