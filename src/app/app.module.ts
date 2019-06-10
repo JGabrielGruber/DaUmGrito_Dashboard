@@ -36,6 +36,10 @@ import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { MenuComponent } from './pages/menu/menu.component';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { loginReducers } from './reducers/login.reducer';
 
 @NgModule({
 	imports: [
@@ -51,7 +55,14 @@ import { MenuComponent } from './pages/menu/menu.component';
 		BsDropdownModule.forRoot(),
 		TabsModule.forRoot(),
 		ChartsModule,
-		FormsModule
+		FormsModule,
+		HttpClientModule,
+		StoreModule.forRoot({
+			'login': loginReducers
+		}),
+		StoreDevtoolsModule.instrument({
+			maxAge: 10 // number of states to retain
+		})
 	],
 	declarations: [
 		AppComponent,
