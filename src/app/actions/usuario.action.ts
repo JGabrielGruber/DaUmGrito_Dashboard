@@ -31,7 +31,7 @@ export class UnsetUsuario implements Action {
 	readonly type = UNSET_USUARIO;
 }
 
-export async function fetchUsuario(loginService: LoginService, usuarioService: UsuarioService, store: any, type: any) {
+export async function fetchUsuario(loginService: LoginService, usuarioService: UsuarioService, store: any) {
 	let isFetching: boolean;
 	await store.select('usuario').subscribe((data)=> {
 		isFetching = data.isFetching;
@@ -50,8 +50,7 @@ export async function fetchUsuario(loginService: LoginService, usuarioService: U
 				store.dispatch(new ReceiveUsuario({
 					isFetching		: false,
 					didInvalidate	: false,
-					data			: response.data,
-					type			: type
+					data			: response.data
 				}));
 				return response.data;
 			}

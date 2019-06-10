@@ -6,8 +6,7 @@ export type Action = UsuarioActions.All;
 const defaultState: UsuarioReducer = {
 	isFetching		: false,
 	didInvalidate	: false,
-	data			: null,
-	type			: null
+	data			: null
 }
 
 const newState = (state, newData) => {

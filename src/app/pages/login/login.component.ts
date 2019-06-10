@@ -23,7 +23,6 @@ interface AppState {
 })
 export class LoginComponent {
 	credentials = { client_id: null, client_secret: null };
-	type: any;
 	login$: Observable<LoginReducer>;
 
 	constructor(
@@ -46,13 +45,10 @@ export class LoginComponent {
 	async logIn(): Promise<void> {
 		let result: Http;
 		if ((this.credentials.client_id.toString()).length <= 11) {
-			this.type	= 'agente';
 			result	= await this.agenteService.getIdByCpf(this.credentials.client_id);
 			if (result.success) {
 				this.credentials.client_id	= result.data._id;
 			}
-		} else {
-			this.type	= 'empresa';
 		}
 		let login:Login = {
 			client_id: this.credentials.client_id,
@@ -66,7 +62,7 @@ export class LoginComponent {
 			this.login$.subscribe((data) => {
 				this.loginService.setLogin(data.data);
 			});
-			await UsuarioActions.fetchUsuario(this.loginService, this.usuarioService, this.store, this.type);
+			await UsuarioActions.fetchUsuario(this.loginService, this.usuarioService, this.store);
 			this.router.navigateByUrl('/', { replaceUrl: true });
 		}
 	}
