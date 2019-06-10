@@ -40,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { loginReducers } from './reducers/login.reducer';
+import { usuarioReducers } from './reducers/usuario.reducer';
 
 @NgModule({
 	imports: [
@@ -58,7 +59,8 @@ import { loginReducers } from './reducers/login.reducer';
 		FormsModule,
 		HttpClientModule,
 		StoreModule.forRoot({
-			'login': loginReducers
+			'login': loginReducers,
+			'usuario': usuarioReducers
 		}),
 		StoreDevtoolsModule.instrument({
 			maxAge: 10 // number of states to retain

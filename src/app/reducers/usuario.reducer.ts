@@ -14,7 +14,7 @@ const newState = (state, newData) => {
 	return Object.assign({}, state, newData);
 }
 
-export function usuarioReducer(state: UsuarioReducer = defaultState, action: Action) {
+export function usuarioReducers(state: UsuarioReducer = defaultState, action: Action) {
 
 	switch (action.type) {
 		case UsuarioActions.RECEIVE_USUARIO:
