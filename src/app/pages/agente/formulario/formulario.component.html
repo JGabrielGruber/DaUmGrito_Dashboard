@@ -10,10 +10,10 @@
 					<div class="row">
 						<div class="form-group col-lg-6">
 							<label for="foto">Foto</label>
-							<input type="file" class="form-control" name="foto" [(ngModel)]="foto" required>
+							<input type="file" class="form-control" accept="image/*" id="imageCapturer" (change)="useImage($event)">
 						</div>
 						<div class="form-group col-lg-6">
-							<img [src]="foto">
+							<img *ngIf="URL" [src]="URL" id="imageViewer">
 						</div>
 					</div>
 					<div class="row">
@@ -55,8 +55,8 @@
 				</form>
 			</div>
 			<div class="card-footer">
-				<button type="button" (click)="teste()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-				<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+				<button type="button" (click)="teste()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
+				<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Resetar</button>
 			</div>
 		</div>
 	</div>

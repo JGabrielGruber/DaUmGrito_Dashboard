@@ -39,6 +39,10 @@ export const routes: Routes = [
 			{
 				path: 'agentes',
 				loadChildren: () => import('./pages/agente/agente.module').then(m => m.AgenteModule)
+			},
+			{
+				path: 'chamados',
+				loadChildren: () => import('./pages/chamado/chamado.module').then(m => m.ChamadoModule)
 			}
 		]
 	}
