@@ -6,57 +6,67 @@
 				<small></small>
 			</div>
 			<div class="card-body">
-				<form #agenteForm="ngForm">
+				<form (ngSubmit)="register()" #agenteForm="ngForm">
 					<div class="row">
-						<div class="form-group col-lg-6">
-							<label for="foto">Foto</label>
-							<input type="file" class="form-control" accept="image/*" id="imageCapturer" (change)="useImage($event)">
-						</div>
-						<div class="form-group col-lg-6">
-							<img *ngIf="URL" [src]="URL" id="imageViewer">
+						<div class="input-group mb-3 col-md-6">
+							<button *ngIf="!URL" type="button" class="btn btn-clear to-btn" onclick="document.getElementById('imageCapturer').click()">
+								Selecionar Foto
+							</button>
+							<img *ngIf="URL" [src]="URL" class="img-avatar" style="width: 80px; height: 80px;" onclick="document.getElementById('imageCapturer').click()" />
+							<input type="file" class="form-control" accept="image/*" id="imageCapturer" (change)="getImage($event)" hidden>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-lg-3">
-							<label for="cpf">CPF</label>
-							<input type="number" class="form-control" name="cpf" placeholder="Digite o CPF do Agente"
-								required>
+						<div class="input-group mb-3 col-md-6">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="icon-user"></i></span>
+							</div>
+							<input type="number" name="cpf" class="form-control" placeholder="CPF"
+								autocomplete="username" [(ngModel)]="agente.cpf" required>
 						</div>
-						<div class="form-group col-lg-9">
-							<label for="nome">Nome</label>
-							<input type="text" class="form-control" name="nome" placeholder="Digite o nome do Agente"
-								required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-lg-6">
-							<label for="telefone_um">Telefone</label>
-							<input type="number" class="form-control" name="telefone_um"
-								placeholder="Digite o telefone do Agente" required>
-						</div>
-						<div class="form-group col-lg-6">
-							<label for="email_um">Email</label>
-							<input type="email" class="form-control" name="email_um"
-								placeholder="Digite o email do Agente" required>
+						<div class="input-group mb-3 col-md-6">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="icon-user"></i></span>
+							</div>
+							<input type="text" name="nome" class="form-control" placeholder="Nome"
+								required [(ngModel)]="agente.nome">
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-lg-6">
-							<label for="funcao">Função</label>
-							<input type="number" class="form-control" name="funcao"
-								placeholder="Digite a função do Agente" required>
+						<div class="input-group mb-3 col-md-6">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="icon-phone"></i></span>
+							</div>
+							<input type="tel" name="contato.telefone_um" class="form-control" placeholder="Telefone"
+								required [(ngModel)]="agente.contato.telefone_um">
 						</div>
-						<div class="form-group col-lg-6">
-							<label for="hash">Senha</label>
-							<input type="password" class="form-control" name="hash" placeholder="Senha para o Agente"
-								required>
+						<div class="input-group mb-3 col-md-6">
+							<div class="input-group-prepend">
+								<span class="input-group-text">@</span>
+							</div>
+							<input type="email" class="form-control" name="contato.email" placeholder="Email"
+								autocomplete="email" required [(ngModel)]="agente.contato.email_um">
 						</div>
+					</div>
+					<div class="row">
+						<div class="input-group mb-3 col-md-12">
+							<textarea name="funcao" class="form-control" placeholder="Função"
+								required [(ngModel)]="agente.funcao"></textarea>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="icon-lock"></i></span>
+						</div>
+						<input type="password" name="hash" class="form-control" placeholder="Senha"
+							autocomplete="new-password" required [(ngModel)]="agente.hash">
 					</div>
 				</form>
 			</div>
 			<div class="card-footer">
-				<button type="button" (click)="teste()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
-				<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Resetar</button>
+				<button type="button" (click)="register()" class="btn btn-sm btn-primary"
+					[disabled]="!agenteForm.form.valid"><i class="fa fa-dot-circle-o"></i> Cadastrar</button>
+				<button type="reset" class="btn btn-sm btn-clear"><i class="fa fa-ban"></i> Resetar</button>
 			</div>
 		</div>
 	</div>

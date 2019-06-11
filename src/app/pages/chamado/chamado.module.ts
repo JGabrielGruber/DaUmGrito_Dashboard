@@ -9,12 +9,14 @@ const routes: Routes = [
 		component: ChamadoComponent,
 		data: {
 			title: 'Chamados'
-		},
-		
+		}
 	},
 	{
 		path: 'detalhe',
-		loadChildren: './detalhe/detalhe.module#DetalheModule'
+		loadChildren: './detalhe/detalhe.module#DetalheModule',
+		data: {
+			title: 'Detalhes'
+		},
 	}
 ];
 

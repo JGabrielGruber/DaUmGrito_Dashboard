@@ -1,4 +1,8 @@
+import { AgenteService } from './../../../services/agente.service';
+import { LoginService } from './../../../services/login.service';
+import { Agente } from './../../../models/agente.model';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 //import * as Jimp from 'jimp';
 
 
@@ -8,11 +12,17 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./formulario.component.scss']
 })
 export class FormularioComponent implements OnInit {
+	agente: Agente = new Agente();
+	isFetching: boolean = false;
 	foto;
 	URL;
 	_changeDetection;
 
-	constructor() {
+	constructor(
+		public router: Router,
+		private loginSerivce: LoginService,
+		private agenteService: AgenteService
+	) {
 	}
 
 	ngOnInit() {
@@ -30,10 +40,7 @@ export class FormularioComponent implements OnInit {
 		}
 	}
 
-	async teste(): Promise<void> {
-		console.log("aQQQQQQQQQ");
-
-		console.log(this.foto);
+	async register() {
 		/*Jimp.read(this.foto)
 		.then(async image => {
 			this.foto = await image.getBase64Async("data:image/jpeg;base64");
@@ -41,6 +48,16 @@ export class FormularioComponent implements OnInit {
 		.catch(err => {
 		  // Handle an exception.
 		});*/
+		let token = await this.loginSerivce.getToken();
+		if (!this.isFetching) {
+			this.isFetching = true;
+			this.agente.foto = this.URL;
+			let result = await this.agenteService.post(this.agente, token);
+			this.isFetching = false;
+			if (result.success) {
+				alert("Sucesso!")
+			}
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { MenuComponent } from './pages/menu/menu.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
 	{
@@ -20,7 +21,7 @@ export const routes: Routes = [
 	},
 	{
 		path: 'signup',
-		component: RegisterComponent,
+		component: SignupComponent,
 		data: {
 			title: 'Página de Cadastro'
 		}

@@ -106,6 +106,9 @@
 				<button type="button" *ngIf="!chamado.responsavel"
 					class="btn btn-sm btn-primary" (click)="atender()">
 					<i class="fa fa-dot-circle-o"></i> Atender Chamado</button>
+				<button type="button" *ngIf="chamado.responsavel && chamado.status != 'Concluido'"
+					class="btn btn-sm btn-primary" (click)="atender()">
+					<i class="fa fa-dot-circle-o"></i> Concluir Chamado</button>
 			</div>
 		</div>
 	</div>
