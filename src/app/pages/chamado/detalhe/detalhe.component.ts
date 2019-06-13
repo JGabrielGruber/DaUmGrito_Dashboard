@@ -1,3 +1,4 @@
+import { UsuarioReducer } from './../../../models/usuarioR.model';
 import { Store } from '@ngrx/store';
 import { ChamadoReducer } from './../../../models/chamadoR.model';
 import { LoginService } from './../../../services/login.service';
@@ -6,9 +7,11 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChamadoService } from '../../../services/chamado.service';
 import * as ChamadoActions from '../../../actions/chamado.action';
+import { Observable } from 'rxjs';
 
 interface AppState {
-	chamados: ChamadoReducer
+	chamados:	ChamadoReducer,
+	usuario:	UsuarioReducer
 }
 
 @Component({
@@ -17,7 +20,8 @@ interface AppState {
 	styleUrls: ['./detalhe.component.scss']
 })
 export class DetalheComponent {
-	chamado: Chamado = new Chamado();
+	chamado:	Chamado = new Chamado();
+	usuario$:	Observable<UsuarioReducer>;
 
 	constructor(
 		public router: Router,
@@ -26,6 +30,7 @@ export class DetalheComponent {
 		private loginService: LoginService,
 		private store: Store<AppState>
 	) {
+		this.usuario$	= this.store.select('usuario');
 		this.route.queryParams.subscribe((params) => {
 			if (params) {
 				this.obterChamado(params.id);
