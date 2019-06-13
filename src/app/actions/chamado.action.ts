@@ -33,7 +33,9 @@ export class UnsetChamado implements Action {
 	readonly type = UNSET_CHAMADO;
 }
 
-export async function fetchChamados(chamadoService: ChamadoService, loginService: LoginService, store: any) {
+export async function fetchChamados(chamadoService: ChamadoService,
+	loginService: LoginService, store: any, idEmpresa: string=null, idAgente: string=null
+	) {
 	let isFetching:	boolean;
 	await store.select('chamados').subscribe((data) => {
 		isFetching	= data.isFetching;
@@ -46,10 +48,18 @@ export async function fetchChamados(chamadoService: ChamadoService, loginService
 		store.dispatch(new RequestChamado());
 		let token	= await loginService.getToken();
 		if (token) {
-			let response	= await chamadoService.getChamados(token);
+			let response;
+			if (idEmpresa) {
+				response	= await chamadoService.getByEmpresa(idEmpresa, token);
+			} else if (idAgente) {
+				response	= await chamadoService.getByAgente(idAgente, token);
+			} else {
+				response	= await chamadoService.getChamados(token);
+			}
 			if (response.success) {
 				chamadoService.setChamados(response.data);
-				store.dispatch(new SetChamado(response.data));
+				store.dispatch(new ReceiveChamado(
+					{ isFetching: false, didInvalidate: false, data: response.data }));
 				return response.data;
 			}
 			store.dispatch(new ReceiveFetch);

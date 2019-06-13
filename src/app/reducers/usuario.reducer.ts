@@ -17,8 +17,6 @@ export function usuarioReducers(state: UsuarioReducer = defaultState, action: Ac
 
 	switch (action.type) {
 		case UsuarioActions.RECEIVE_USUARIO:
-			return newState(state, { isFetching: true, didInvalidate: false });
-		case UsuarioActions.RECEIVE_USUARIO:
 			return newState(state, action.payload);
 		case UsuarioActions.RECEIVE_FETCH:
 			return newState(state, { isFetching: false, didInvalidate: true });

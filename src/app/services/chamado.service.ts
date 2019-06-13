@@ -26,6 +26,14 @@ export class ChamadoService extends Service<Chamado> {
 		return this.http.get(`${ this.url }/cliente/${ cliente.cpf }`, token);
 	}
 
+	async getByAgente(cpf: string, token): Promise<Http> {
+		return this.http.get(`${ this.url }/responsavel/${ cpf }`, token);
+	}
+
+	async getByEmpresa(cnpj: string, token): Promise<Http> {
+		return this.http.get(`${ this.url }/empresa/${ cnpj }`, token);
+	}
+
 	async postAtendente(id: string, token): Promise<Http> {
 		return this.http.post(`${ this.url }/${ id }/responsavel`, {}, token);
 	}

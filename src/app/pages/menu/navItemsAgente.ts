@@ -19,6 +19,11 @@ export const navItemsAgente: NavData[] = [
 			{
 				name: 'Chamados da Empresa',
 				url: '/chamados/empresa',
+				attributes: {
+					queryParams: {
+						tipo: 'empresa'
+					}
+				},
 				icon: 'fa fa-id-card'
 			},
 			{

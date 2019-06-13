@@ -21,6 +21,7 @@ interface AppState {
 })
 export class MenuComponent {
 	usuario$: Observable<UsuarioReducer>;
+	loggedOff: boolean	= false;
 
 	public navItems;
 	public sidebarMinimized = true;
@@ -49,11 +50,16 @@ export class MenuComponent {
 	async check() {
 		if ((await this.loginService.getToken())) {
 			await UsuarioActions.fetchUsuario(this.loginService, this.usuarioService, this.store);
-			this.usuario$.subscribe((usuario) => {
-				if (usuario.data.cnpj) {
-					this.navItems = navItemsEmpresa;
-				} else {
-					this.navItems = navItemsAgente;
+			let usuarioSubscrition	= this.usuario$.subscribe((usuario) => {
+				if (usuario.data) {
+					if (usuario.data.cnpj) {
+						this.navItems = navItemsEmpresa;
+					} else {
+						this.navItems = navItemsAgente;
+					}
+				}
+				if (this.loggedOff) {
+					usuarioSubscrition.unsubscribe();
 				}
 			});
 		} else {
@@ -64,6 +70,7 @@ export class MenuComponent {
 	async logOff() {
 		this.loginService.unsetLogin();
 		this.store.dispatch(new UsuarioActions.UnsetUsuario());
+		this.loggedOff = true;
 		this.router.navigateByUrl('/login');
 	}
 

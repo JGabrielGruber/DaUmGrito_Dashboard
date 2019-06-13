@@ -8,7 +8,24 @@ const routes: Routes = [
 		path: '',
 		component: ChamadoComponent,
 		data: {
-			title: 'Chamados'
+			title: 'Chamados',
+			type: 'all'
+		}
+	},
+	{
+		path: 'empresa',
+		component: ChamadoComponent,
+		data: {
+			title: 'Chamados da Empresa',
+			type: 'empresa'
+		}
+	},
+	{
+		path: 'agente',
+		component: ChamadoComponent,
+		data: {
+			title: 'Chamados do Agente',
+			type: 'agente'
 		}
 	},
 	{
