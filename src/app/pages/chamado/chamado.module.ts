@@ -7,6 +7,7 @@ const routes: Routes = [
 	{
 		path: '',
 		component: ChamadoComponent,
+		pathMatch: 'full',
 		data: {
 			title: 'Chamados',
 			type: 'all'
@@ -30,7 +31,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'detalhe',
-		loadChildren: './detalhe/detalhe.module#DetalheModule',
+		loadChildren: () => import('./detalhe/detalhe.module').then(m => m.DetalheModule),
 		data: {
 			title: 'Detalhes'
 		},

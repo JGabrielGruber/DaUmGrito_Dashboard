@@ -27,3 +27,14 @@ h1 {
 	color: $primary;
 	cursor: grab;
 }
+
+.btn-fab {
+	position: fixed;
+	bottom: 4.5%;
+	right: 4%;
+	font-size: 26px;
+	margin: 0;
+	border-radius: 50%;
+	width: 56px;
+	height: 56px;
+}

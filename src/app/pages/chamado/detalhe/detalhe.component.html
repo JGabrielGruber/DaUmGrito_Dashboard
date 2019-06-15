@@ -104,12 +104,14 @@
 			</div>
 			<div class="card-footer" *ngIf="(usuario$ | async).data.cpf">
 				<button type="button" *ngIf="!chamado.responsavel"
-					class="btn btn-sm btn-primary" (click)="atender()">
+					class="btn btn-md btn-primary" (click)="atender()">
 					<i class="fa fa-dot-circle-o"></i> Atender Chamado</button>
-				<button type="button" *ngIf="chamado.responsavel.cpf == (usuario$ | async).data.cpf && chamado.status != 'Concluido'"
-					class="btn btn-sm btn-primary" (click)="atender()">
+				<button type="button"
+					*ngIf="chamado.responsavel && chamado.responsavel.cpf == (usuario$ | async).data.cpf && chamado.status != 'Concluido'"
+					class="btn btn-md btn-primary" (click)="atender()">
 					<i class="fa fa-dot-circle-o"></i> Concluir Chamado</button>
 			</div>
 		</div>
 	</div>
+	<app-chat [id]="chamado._id"></app-chat>
 </div>

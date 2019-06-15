@@ -1,0 +1,19 @@
+<button class="btn btn-lg btn-primary btn-fab" color="primary">
+	
+</button>
+<div class="container">
+	<div class="container-header">
+		<div class="container-header-title">
+			<img *ngIf="(usuario$ | async).data.foto" [src]="(usuario$ | async).data.foto" class="img-avatar"/>
+			<p style="margin: auto 10px;">{{ (usuario$ | async).data.nome }}</p>
+		</div>
+		<div class="container-header-buttons">
+			<button class="btn btn-sm btn-ghost-primary">
+				<i class="fa fa-window-minimize"></i>
+			</button>
+		</div>
+	</div>
+	<div class="container-body">
+
+	</div>
+</div>
