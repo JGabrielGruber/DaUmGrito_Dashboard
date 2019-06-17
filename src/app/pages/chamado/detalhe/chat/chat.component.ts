@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit {
 	usuario$:		Observable<UsuarioReducer>;
 	visible:		boolean	= false;
 	conteudo:		string;
+	url:			string;
 
 	constructor(
 		private store: Store<AppState>,
@@ -55,10 +56,18 @@ export class ChatComponent implements OnInit {
 	}
 
 	async syncChat() {
+		if (!this.url) {
+			this.url = document.URL;
+		}
 		setTimeout(() => {
-			ResolucoesActions.fetchResolucoes(this.resolucoesService, this.loginService, this.store, this.id);
-			if (this.visible)
+			console.log(document.URL);
+			
+			if (document.URL == this.url) {
+				ResolucoesActions.fetchResolucoes(this.resolucoesService, this.loginService, this.store, this.chamado._id);
 				this.syncChat();
+			} else {
+				this.store.dispatch(new ResolucoesActions.UnsetResolucoes());
+			}
 		}, 3000);
 	}
 
