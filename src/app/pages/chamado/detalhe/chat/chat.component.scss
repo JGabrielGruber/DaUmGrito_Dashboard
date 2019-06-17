@@ -28,3 +28,60 @@
 	margin: auto 2px;
 	width: 10%;
 }
+
+.container-body {
+	height: 90%;
+}
+
+.container-messages {
+	overflow-y: auto;
+	height: 90%;
+}
+
+.container-messages-line {
+	position: relative;
+	display: flex;
+	width: 100%;
+}
+
+.container-messages-sender {
+	background-color: #2F353A;
+	color: #F1F1F1;
+	margin: 5px 10px;
+	margin-left: auto;
+	max-width: 80%;
+	min-width: 40%;
+	padding: 10px;
+}
+
+.container-messages-receptor {
+	background-color: #FAFAFA;
+	margin: 5px 10px;
+	margin-right: auto;
+	max-width: 80%;
+	min-width: 40%;
+	padding: 10px;
+}
+
+.container-messages-sender .container-messages-time {
+	text-align: right;
+}
+
+.container-messages-receptor .container-messages-time {
+	text-align: left;
+}
+
+.container-messages-time {
+	font-size: 9px;
+}
+
+.container-input {
+	position: relative;
+	display: flex;
+	height: 10%;
+	background-color: #F1F1F1;
+}
+
+.angular-with-newlines {
+	white-space: pre-wrap;
+}

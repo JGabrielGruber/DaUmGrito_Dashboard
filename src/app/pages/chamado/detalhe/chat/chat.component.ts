@@ -8,6 +8,7 @@ import { UsuarioReducer } from '../../../../models/usuarioR.model';
 import { LoginService } from '../../../../services/login.service';
 import { ResolucoesService } from '../../../../services/resolucoes.service';
 import { UsuarioService } from '../../../../services/usuario.service';
+import * as ResolucoesActions from '../../../../actions/resolucoes.action';
 
 interface AppState {
 	resolucoes:	ResolucoesReducer,
@@ -20,10 +21,12 @@ interface AppState {
 	styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-	@Input() public id : string;
+	@Input() public id:	string;
 	chamado:		Chamado;
 	resolucoes$:	Observable<ResolucoesReducer>;
 	usuario$:		Observable<UsuarioReducer>;
+	visible:		boolean	= false;
+	conteudo:		string;
 
 	constructor(
 		private store: Store<AppState>,
@@ -34,7 +37,11 @@ export class ChatComponent implements OnInit {
 	) {
 		this.resolucoes$	= this.store.select('resolucoes');
 		this.usuario$		= this.store.select('usuario');
+	}
+
+	ngOnInit() {
 		this.obterChamado(this.id);
+		this.syncChat();
 	}
 
 	async obterChamado(id: string): Promise<void> {
@@ -47,7 +54,26 @@ export class ChatComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
+	async syncChat() {
+		ResolucoesActions.fetchResolucoes(this.resolucoesService, this.loginService, this.store, this.id);
 	}
 
+	flip() {
+		this.visible	= !this.visible;
+		this.scroll();
+	}
+
+	async send() {
+		ResolucoesActions.postMensagem(this.resolucoesService, this.loginService, this.store, this.id, this.conteudo);
+		this.conteudo	= "";
+		this.scroll();
+	}
+
+	async scroll() {
+		setTimeout(()=>{
+			let el	= document.getElementById('chatMensagens');
+			if (el)
+				el.scrollTop = el.scrollHeight;
+		}, 10);
+	}
 }

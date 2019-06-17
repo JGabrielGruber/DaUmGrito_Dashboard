@@ -21,6 +21,7 @@ interface AppState {
 })
 export class DetalheComponent {
 	chamado:	Chamado = new Chamado();
+	id:			string	= "lalalal";
 	usuario$:	Observable<UsuarioReducer>;
 
 	constructor(
@@ -33,6 +34,7 @@ export class DetalheComponent {
 		this.usuario$	= this.store.select('usuario');
 		this.route.queryParams.subscribe((params) => {
 			if (params) {
+				this.id	= params.id;
 				this.obterChamado(params.id);
 			}
 		});
@@ -52,7 +54,7 @@ export class DetalheComponent {
 		let token = await this.loginService.getToken();
 		let response = await this.chamadoService.postAtendente(this.chamado._id, token);
 		if (response.success) {
-			this.obterChamado(this.chamado._id);
+			this.obterChamado(this.id);
 			ChamadoActions.fetchChamados(this.chamadoService, this.loginService, this.store);
 		}
 	}

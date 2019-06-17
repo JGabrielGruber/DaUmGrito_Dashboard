@@ -110,8 +110,8 @@
 					*ngIf="chamado.responsavel && chamado.responsavel.cpf == (usuario$ | async).data.cpf && chamado.status != 'Concluido'"
 					class="btn btn-md btn-primary" (click)="atender()">
 					<i class="fa fa-dot-circle-o"></i> Concluir Chamado</button>
+				<app-chat [id]="id" *ngIf="chamado.responsavel && chamado.responsavel.cpf == (usuario$ | async).data.cpf && chamado.status != 'Novo'"></app-chat>
 			</div>
 		</div>
 	</div>
-	<app-chat [id]="chamado._id"></app-chat>
 </div>

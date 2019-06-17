@@ -32,10 +32,10 @@ export class UnsetResolucoes implements Action {
 	readonly type = UNSET_RESOLUCOES;
 }
 
-export async function fetchResolucoess(resolucoesService: ResolucoesService,
-	loginService: LoginService, id: string, store: any) {
+export async function fetchResolucoes(resolucoesService: ResolucoesService,
+	loginService: LoginService, store: any, id: string) {
 	let isFetching:	boolean;
-	await store.select('resolucoess').subscribe((data) => {
+	await store.select('resolucoes').subscribe((data) => {
 		isFetching	= data.isFetching;
 	});
 	if (!isFetching) {
@@ -45,7 +45,8 @@ export async function fetchResolucoess(resolucoesService: ResolucoesService,
 			let response	= await resolucoesService.getResolucoes(id, token);
 			if (response.success) {
 				store.dispatch(new ReceiveResolucoes(
-					{ isFetching: false, didInvalidate: false, data: response.data }));
+					{ isFetching: false, didInvalidate: false, data: response.data }
+				));
 				return response.data;
 			} else {
 				store.dispatch(new ReceiveFetch);
@@ -58,28 +59,22 @@ export async function fetchResolucoess(resolucoesService: ResolucoesService,
 
 export async function postMensagem(resolucoesService: ResolucoesService, loginService: LoginService,
 	store: any, id: string, conteudo: string) {
-	let isFetching: boolean;
-	await store.select('resolucoes').subscribe((data)=> {
-		isFetching = data.isFetching;
-	});
-	if (isFetching) {
-		let token	= await loginService.getToken();
-		if (token) {
-			let resolucoes;
-			await store.select('resolucoes').subscribe((data) => {
-				resolucoes	= data.data;
-			});
-			resolucoes.put({ tipo: "cliente", conteudo: conteudo, pendente: true });
-			store.dispatch(new SetResolucoes(resolucoes));
-			let response	= await resolucoesService.postMensagem(id, conteudo, token);
-			if (response.success) {
-				store.dispatch(new ReceiveResolucoes(
-					{ isFetching: false, didInvalidate: false, data: response.data }));
-				return response.data;
-			} else {
-				store.dispatch(new ReceiveFetch);
-				return;
-			}
+	let token	= await loginService.getToken();
+	if (token) {
+		let resolucoes;
+		await store.select('resolucoes').subscribe((data) => {
+			resolucoes	= data.data;
+		});
+		resolucoes.resolucoes.push({ level: "agente", conteudo: conteudo, pendente: true });
+		store.dispatch(new SetResolucoes(resolucoes));
+		let response	= await resolucoesService.postMensagem(id, conteudo, token);
+		if (response.success) {
+			store.dispatch(new ReceiveResolucoes(
+				{ isFetching: false, didInvalidate: false, data: response.data }));
+			return response.data;
+		} else {
+			store.dispatch(new ReceiveFetch);
+			return;
 		}
 	}
 }

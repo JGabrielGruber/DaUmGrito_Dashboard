@@ -1,19 +1,55 @@
-<button class="btn btn-lg btn-primary btn-fab" color="primary">
-	
+<button class="btn btn-lg btn-primary btn-fab" color="primary" (click)="flip()" *ngIf="!visible">
+	<i class="fa fa-comments"></i>
 </button>
-<div class="container">
+<div class="container" *ngIf="visible">
 	<div class="container-header">
 		<div class="container-header-title">
-			<img *ngIf="(usuario$ | async).data.foto" [src]="(usuario$ | async).data.foto" class="img-avatar"/>
-			<p style="margin: auto 10px;">{{ (usuario$ | async).data.nome }}</p>
+			<img *ngIf="chamado.cliente.foto" [src]="chamado.cliente.foto" class="img-avatar"/>
+			<p style="margin: auto 10px;">{{ chamado.cliente.nome }}</p>
 		</div>
 		<div class="container-header-buttons">
-			<button class="btn btn-sm btn-ghost-primary">
+			<button class="btn btn-sm btn-ghost-primary" (click)="flip()">
 				<i class="fa fa-window-minimize"></i>
 			</button>
 		</div>
 	</div>
 	<div class="container-body">
-
+		<div id="chatMensagens" class="container-messages">
+			<div class="container-messages-line" *ngFor="let mensagem of (resolucoes$|async).data.resolucoes">
+				<div class="container-messages-sender" *ngIf="mensagem.level == 'agente'">
+					<div class="container-messages-content">
+						<p class="angular-with-newlines">{{ mensagem.conteudo }}</p>
+					</div>
+					<div class="container-messages-time" *ngIf="!mensagem.pendente">
+						{{ mensagem.timestamp }}
+					</div>
+					<div class="container-messages-time" *ngIf="mensagem.pendente">
+						<i class="fa fa-clock-o"></i>
+					</div>
+				</div>
+				<div class="container-messages-receptor" *ngIf="mensagem.level == 'cliente'">
+					<div class="container-messages-content">
+						<p class="angular-with-newlines">{{ mensagem.conteudo }}</p>
+					</div>
+					<div class="container-messages-time">
+						{{ mensagem.timestamp }}
+					</div>
+					<div class="container-messages-time" *ngIf="mensagem.pendente">
+						<i class="fa fa-clock-o"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form #mensagemForm="ngForm">
+			<div class="container-input" *ngIf="chamado.status != 'Concluido'">
+				<textarea name="conteudo" class="form-control" placeholder="Mensagem..." [(ngModel)]="conteudo"
+					required style="width: 85%; height: 100%;"></textarea>
+				<button class="btn btn-sm btn-clear" color="primary" (click)="send()"
+					style="height: 100%; width: 15%; margin: auto; font-size: 18px; color: #212121"
+					[disabled]="!mensagemForm.form.valid">
+					<i class="fa fa-send"></i>
+				</button>
+			</div>
+		</form>
 	</div>
 </div>

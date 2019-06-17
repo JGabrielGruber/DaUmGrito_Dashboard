@@ -42,6 +42,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { loginReducers } from './reducers/login.reducer';
 import { usuarioReducers } from './reducers/usuario.reducer';
 import { chamadoReducers } from './reducers/chamado.reducer';
+import { resolucaoReducers } from './reducers/resolucao.reducer';
 
 @NgModule({
 	imports: [
@@ -62,7 +63,8 @@ import { chamadoReducers } from './reducers/chamado.reducer';
 		StoreModule.forRoot({
 			'login': loginReducers,
 			'usuario': usuarioReducers,
-			'chamados': chamadoReducers
+			'chamados': chamadoReducers,
+			'resolucoes': resolucaoReducers
 		}),
 		StoreDevtoolsModule.instrument({
 			maxAge: 10 // number of states to retain

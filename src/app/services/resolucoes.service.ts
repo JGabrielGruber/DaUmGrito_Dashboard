@@ -11,11 +11,11 @@ import { Cliente } from '../models/cliente.model';
 })
 export class ResolucoesService extends Service<Array<Mensagem>> {
 
-	url: string = `${Configs.url}chamado`;
+	url: string = `${Configs.url}chamados`;
 
 	constructor(
 		public http: HttpService) {
-		super(`${Configs.url}chamado`, http);
+		super(`${Configs.url}chamados`, http);
 	}
 
 	async getResolucoes(id, token): Promise<Http> {
@@ -23,6 +23,6 @@ export class ResolucoesService extends Service<Array<Mensagem>> {
 	}
 
 	async postMensagem(id: string, conteudo: string, token): Promise<Http> {
-		return this.http.post(`${ this.url }/${ id }/mensagem`, conteudo, token);
+		return this.http.post(`${ this.url }/${ id }/mensagem`, { conteudo: conteudo }, token);
 	}
 }
