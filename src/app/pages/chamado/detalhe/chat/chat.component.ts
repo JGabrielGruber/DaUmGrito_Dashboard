@@ -55,7 +55,10 @@ export class ChatComponent implements OnInit {
 	}
 
 	async syncChat() {
-		ResolucoesActions.fetchResolucoes(this.resolucoesService, this.loginService, this.store, this.id);
+		setTimeout(() => {
+			ResolucoesActions.fetchResolucoes(this.resolucoesService, this.loginService, this.store, this.id);
+			this.syncChat();
+		}, 3000);
 	}
 
 	flip() {

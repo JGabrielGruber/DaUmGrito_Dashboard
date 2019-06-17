@@ -61,6 +61,7 @@ export async function postMensagem(resolucoesService: ResolucoesService, loginSe
 	store: any, id: string, conteudo: string) {
 	let token	= await loginService.getToken();
 	if (token) {
+		store.dispatch(new RequestResolucoes);
 		let resolucoes;
 		await store.select('resolucoes').subscribe((data) => {
 			resolucoes	= data.data;
