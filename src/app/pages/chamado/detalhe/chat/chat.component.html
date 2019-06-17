@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<div class="container-body">
-		<div id="chatMensagens" class="container-messages">
+		<div id="chatMensagens" class="container-messages" *ngIf="(resolucoes$|async).data">
 			<div class="container-messages-line" *ngFor="let mensagem of (resolucoes$|async).data.resolucoes">
 				<div class="container-messages-sender" *ngIf="mensagem.level == 'agente'">
 					<div class="container-messages-content">
